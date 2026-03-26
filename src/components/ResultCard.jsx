@@ -1,5 +1,11 @@
-const ResultCard = ({ probability, prediction }) => {
-  const percent = Math.round(probability * 100);
+import { motion } from "framer-motion";
+
+const ResultCard = ({ result }) => {
+  console.log(result)
+  const label = result.result.label;
+  const confidence = result.result.confidence;
+  const prediction = label === 'DEEPFAKE' ? 'Fake' : 'Real';
+  const percent = Math.round(confidence * 100);
   const colorClass = prediction === 'Real' ? 'from-green-500 to-green-400' : 'from-red-500 to-red-400';
   const textClass = prediction === 'Real' ? 'text-green-400' : 'text-red-400';
 

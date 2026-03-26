@@ -12,13 +12,13 @@ import {
 } from "recharts";
 
 const stats = {
-  accuracy: 0.70,
-  precision: 0.68,
-  recall: 0.72,
-  f1: 0.69,
+  accuracy: 0.77,
+  precision: 0.74,
+  recall: 0.81,
+  f1: 0.78,
   confusionMatrix: [
-    [50, 10],
-    [12, 48],
+    [79, 29],
+    [19, 83],
   ],
 };
 
@@ -81,76 +81,6 @@ const ModelStats = () => {
       <div className="bg-white/5 backdrop-blur-lg p-6 rounded-2xl shadow-xl">
         <Heatmap matrix={stats.confusionMatrix} />
       </div>
-
-      {/* 📈 Training Graph */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-white/5 backdrop-blur-lg p-6 rounded-2xl shadow-xl"
-      >
-        <h3 className="text-lg font-semibold text-white mb-4">
-          Training vs Validation Loss
-        </h3>
-
-        <div className="h-64">
-          <ResponsiveContainer  width="100%" height={250}>
-            <LineChart data={trainingData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-              <XAxis dataKey="epoch" stroke="#aaa" />
-              <YAxis stroke="#aaa" />
-              <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="loss" stroke="#22c55e" />
-              <Line type="monotone" dataKey="val_loss" stroke="#ef4444" />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-      </motion.div>
-
-      {/* 📊 ROC Curve */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-white/5 backdrop-blur-lg p-6 rounded-2xl shadow-xl"
-      >
-        <h3 className="text-lg font-semibold text-white mb-4">
-          ROC Curve
-        </h3>
-
-        <div className="h-64">
-          <ResponsiveContainer  width="100%" height={250}>
-            <LineChart data={rocData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-              <XAxis
-                dataKey="fpr"
-                type="number"
-                domain={[0, 1]}
-                stroke="#aaa"
-              />
-              <YAxis
-                dataKey="tpr"
-                type="number"
-                domain={[0, 1]}
-                stroke="#aaa"
-              />
-              <Tooltip />
-              <Line
-                type="monotone"
-                dataKey="tpr"
-                stroke="#3b82f6"
-                dot={false}
-              />
-              {/* diagonal baseline */}
-              <Line
-                dataKey="fpr"
-                stroke="#888"
-                dot={false}
-                strokeDasharray="5 5"
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-      </motion.div>
     </div>
   );
 };
