@@ -13,26 +13,30 @@ const Heatmap = ({ matrix }) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      <h3 className="text-lg font-semibold text-white">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="flex flex-col items-center gap-6 p-6 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:border-teal-500/30 transition-all"
+    >
+      <h3 className="text-lg font-semibold text-transparent bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text">
         Confusion Matrix Heatmap
       </h3>
 
-      <div className="grid grid-cols-3 gap-2 items-center">
+      <div className="grid gap-2 items-center justify-center" style={{ gridTemplateColumns: 'auto auto auto' }}>
         {/* Top Labels */}
         <div></div>
-        <div className="text-sm text-gray-400 text-center">Pred Real</div>
-        <div className="text-sm text-gray-400 text-center">Pred Fake</div>
+        <div className="text-xs text-gray-400 text-center font-semibold px-2">Pred Real</div>
+        <div className="text-xs text-gray-400 text-center font-semibold px-2">Pred Fake</div>
 
         {/* Row 1 */}
-        <div className="text-sm text-gray-400">Actual Real</div>
+        <div className="text-xs text-gray-400 font-semibold">Actual Real</div>
         {matrix[0].map((val, i) => (
           <motion.div
-            key={i}
+            key={`row1-${i}`}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: i * 0.1 }}
-            className="w-20 h-20 flex items-center justify-center rounded-xl font-bold text-white shadow-lg"
+            className="w-20 h-20 flex items-center justify-center rounded-lg font-bold text-white shadow-md border border-gray-700/30 hover:border-gray-600 transition-colors"
             style={{ backgroundColor: getColor(val) }}
           >
             {val}
@@ -40,21 +44,21 @@ const Heatmap = ({ matrix }) => {
         ))}
 
         {/* Row 2 */}
-        <div className="text-sm text-gray-400">Actual Fake</div>
+        <div className="text-xs text-gray-400 font-semibold">Actual Fake</div>
         {matrix[1].map((val, i) => (
           <motion.div
-            key={i}
+            key={`row2-${i}`}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: i * 0.2 }}
-            className="w-20 h-20 flex items-center justify-center rounded-xl font-bold text-white shadow-lg"
+            transition={{ delay: (i + 2) * 0.1 }}
+            className="w-20 h-20 flex items-center justify-center rounded-lg font-bold text-white shadow-md border border-gray-700/30 hover:border-gray-600 transition-colors"
             style={{ backgroundColor: getColor(val) }}
           >
             {val}
           </motion.div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

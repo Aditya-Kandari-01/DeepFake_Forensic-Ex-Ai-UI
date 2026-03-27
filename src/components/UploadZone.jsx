@@ -12,7 +12,7 @@ const UploadZone = ({ onFileSelect }) => {
   return (
     <label 
       htmlFor="fileUpload"
-      className="block text-center cursor-pointer border-2 border-dashed border-gray-500 rounded-lg p-6 hover:border-teal-400 transition"
+      className="block text-center cursor-pointer border-2 border-dashed border-gray-600 rounded-xl p-8 hover:border-teal-400 hover:bg-teal-400/5 transition-all duration-300"
       onDragOver={onDragOver}
       onDrop={onDrop}
     >
@@ -25,8 +25,11 @@ const UploadZone = ({ onFileSelect }) => {
         aria-label="File Upload"
       />
       <div className="flex flex-col items-center justify-center">
-        <svg className="w-12 h-12 mb-3 text-gray-400 group-hover:text-teal-400">/* upload icon */</svg>
-        <p>Drag & drop an image, or click to select</p>
+        <svg className="w-14 h-14 mb-4 text-teal-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
+        </svg>
+        <p className="text-gray-300 font-medium">Drag & drop an image here</p>
+        <p className="text-gray-500 text-sm mt-2">or click to select from your device</p>
       </div>
     </label>
   );
